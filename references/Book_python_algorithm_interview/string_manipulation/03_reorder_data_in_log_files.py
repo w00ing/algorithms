@@ -32,6 +32,13 @@ Output: ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"]
 
 from typing import List
 
-# Solution 1: Using lambda and '+' operator
-def reorder_log_files_lambda_plus(s: List[str]) -> None:
-
+# Solution: Using lambda and '+' operator
+def reorder_log_files_lambda_plus(logs: List[str]) -> List[str]:
+    letters, digits = [], []
+    for log in logs:
+        if log.split()[1].isdigit():
+            digits.append(log)
+        else:
+            letters.append(log)
+    letters.sort(key=lambda x: (x.split()[1:], x.split()[0]))
+    return letters + digits
